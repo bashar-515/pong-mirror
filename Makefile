@@ -5,4 +5,5 @@ run: $(BIN)
 	./$(BIN)
 
 $(BIN): main.c
-	mkdir -p build/$(OS) && cc -o $(BIN) main.c
+	mkdir -p build/$(OS) && \
+		cc -std=c99 -pedantic -Wall -Wextra -o $(BIN) main.c
