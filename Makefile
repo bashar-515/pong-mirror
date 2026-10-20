@@ -6,4 +6,4 @@ run: $(BIN)
 
 $(BIN): main.c
 	mkdir -p build/$(OS) && \
-		cc -std=c99 -pedantic -Wall -Wextra -o $(BIN) main.c
+		cc -std=c99 -pedantic -Wall -Wextra -o $(BIN) pong.c
