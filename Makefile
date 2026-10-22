@@ -17,25 +17,25 @@ else
     $(error unsupported architecture: $(uname_m))
 endif
 
-CFLAGS := -std=c99 -pedantic -Wall -Wextra -Isrc
-
-bin := build/$(os)-$(arch)/pong
-
-srcs := src/main.c $(shell find src/platform/$(os) -name '*.c')
-hdrs := $(wildcard src/*.h src/platform/*.h) \
-		$(shell find src/platform/$(os) -name '*.h')
+flags := -std=c99 -pedantic -Wall -Wextra -Isrc
 
 ifeq ($(os),linux)
-	CFLAGS += -D_POSIX_C_SOURCE=200809L
+	flags += -D_POSIX_C_SOURCE=200809L
 endif
+
+bin := build/$(os)-$(arch)/pong
 
 .PHONY: all
 
 all: $(bin)
 
+srcs := src/main.c $(shell find src/platform/$(os) -name '*.c')
+hdrs := $(wildcard src/*.h src/platform/*.h) \
+		$(shell find src/platform/$(os) -name '*.h')
+
 $(bin): $(srcs) $(hdrs)
 	mkdir -p $(@D) && \
-		$(CC) $(CFLAGS) -o $@ $(srcs)
+		$(CC) $(flags) -o $@ $(srcs)
 
 .PHONY: run
 
